@@ -1,10 +1,14 @@
 <?php
 
 	/**
-	 * Return elapsed time in a human readable format.
+	 * Return the elapsed time in a human readable format.
 	 *
-	 * @param $begin Begin timestamp with microseconds ($begin = microtime())
-	 * @param $end End timestamp with microseconds ($end = microtime())
+	 * Examples:
+	 *   Elapsed time up to 30 seconds looks like this: 0.031s
+	 *   Elapsed time over 30 seconds look like this: 2h 34m 42s
+	 *
+	 * @param $begin Begin timestamp with microseconds ($begin = microtime();)
+	 * @param $end End timestamp with microseconds ($end = microtime();)
 	 *
 	 * @return The elapsed time in a human readable format.
 	 */
@@ -15,7 +19,7 @@
 
 		$buffer = '';
 
-		$vals = array(
+		$time_table = array(
 			'd' => (int) ($time_diff / 86400),
 			'h' => $time_diff / 3600 % 24,
 			'm' => $time_diff / 60 % 60,
@@ -25,9 +29,9 @@
 		if ((int) $time_diff > 30) {
 			$buffer = '';
 
-			while(list($key, $val) = each($vals)) {
-				if ($val > 0) {
-					$buffer .= "$val$key ";
+			foreach ($time_table as $unit => $time) {
+				if ($time > 0) {
+					$buffer .= "$time$unit ";
 				}
 			}
 		} else {
