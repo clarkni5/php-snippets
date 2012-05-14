@@ -1,20 +1,24 @@
 <?php
 
 	/**
-	 * Remove the given key or keys from the array.
+	 * Remove the key from the array.
 	 *
-	 * @param array $input The input array.
-	 * @param mixed $keys The key (single value) or keys (an array of values) to remove from the input array.
+	 * @param array $input The array to remove the value from.
+	 * @param mixed $key The key to remove from the array. An array may be used to designate multiple keys.
 	 *
-	 * @return The array with the given keys removed.
+	 * @return array The array with the key removed.
 	 */
-	function array_remove($input, $keys) {
-		if ( ! is_array($keys)) {
-			$keys = array($keys);
+	function array_remove_key($input, $key) {
+		// Convert a single value key into an array
+		if (!is_array($key)) {
+			$key = array($key);
 		}
-		foreach ($keys as $key) {
-			unset($input[$key]);
+		
+		// Remove keys from the array
+		foreach ($key as $k) {
+			unset($input[$k]);
 		}
+		
 		return $input;
 	}
 	
@@ -25,4 +29,4 @@
 		'sky' => 'Blue'
 	);
 	
-	$foo = array_remove($foo, 'sky');
+	$foo = array_remove_key($foo, 'sky');
