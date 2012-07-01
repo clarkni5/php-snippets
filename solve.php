@@ -107,7 +107,8 @@
 		}
 		$distinct[$value]++;
 	}
-	echo implode(array_map(function($value, $count) { return "$value($count)"; }, array_keys($distinct), $distinct), ', ') . "\n";
+	echo implode(array_map(function($value, $count) { return "$value($count)"; },
+		array_keys($distinct), $distinct), ', ') . "\n";
 	
 	
 	/**
