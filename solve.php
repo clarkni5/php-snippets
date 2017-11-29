@@ -147,16 +147,57 @@
 
 	
 	/**
-	 * Fibonacci number: F(n) = F(n - 1) + F(n - 2)
+	 * Fibonacci number (recursive): F(n) = F(n - 1) + F(n - 2)
 	 */
-	function fibonacci($n) {
-		return ($n < 2) ? 1 : fibonacci($n - 1) + fibonacci($n - 2);
+	function fib($n) {
+		return ($n < 2) ? $n : fib($n - 1) + fib($n - 2);
 	}
-	echo fibonacci(5) . "\n";
+	echo 'fib(): ' . implode(', ', array(fib(0), fib(1), fib(2), fib(3), fib(4), fib(5))) . "\n";
 	
 	
 	/**
-	 * For the future...
-	 * Find the index of the first occurrence of a substring in a string.
+	 * Fibonacci number (iterative): F(n) = F(n - 1) + F(n - 2)
+	 */
+	function fibonacci($n) {
+		$f1 = 0;
+		$f2 = 1;
+		
+		for ($i = 1; $i <= $n; $i++) {
+			$tmp = $f1;
+			$f1 = $f1 + $f2;
+			$f2 = $tmp;
+		}
+		
+		return $f1;
+	}
+	echo 'fibonacci(): ' . implode(', ', array(fibonacci(0), fibonacci(1), fibonacci(2), fibonacci(3), fibonacci(4), fibonacci(5))) . "\n";
+	
+	
+	/**
 	 * Build a list of prime numbers.
 	 */
+	$primes = array();
+	for ($i = 2; $i < 100; $i++) { // a prime number must be greater than 1
+		// Simple check for even numbers
+		if ($i > 2 && $i % 2 == 0) {
+			continue;
+		}
+		
+		// Check odd numbers
+		for ($j = 3; $j < $i; $j += 2) {
+			if ($i % $j == 0) {
+				continue 2;
+			}
+		}
+		
+		$primes[] = $i;
+	}
+	echo 'Primes: ' . implode(', ', $primes) . "\n";
+
+	
+	/**
+	 * Find the index of the first occurrence of a substring in a string.
+	 */
+	$str = 'The quick brown fox jumps over the lazy dog';
+	$substr = 'over';
+	// @TODO
